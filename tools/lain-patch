@@ -1,0 +1,10 @@
+#!/usr/bin/env python2
+
+from lain.LabelingTool import LabelingTool
+
+if __name__ == '__main__':
+    import sys
+
+    tool = LabelingTool()
+    tool.label(sys.argv[1])
+    

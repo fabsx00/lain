@@ -1,0 +1,84 @@
+#!/usr/bin/env python2
+
+from lain.JoernDriver import JoernDriver
+from lain.LabelingTool import LabelingTool
+import sys, os
+
+class EvaluationInitializer:
+    
+    def __init__(self):
+        self.codeDir = None
+        self.outDir = None
+
+    def setCodeDir(self, codeDir):
+        codeDir = os.path.join(codeDir, '')
+        self.codeDir = os.path.abspath(codeDir)
+        self._genOutDirFromCodeDir()
+        self.labelFilename = os.path.join(self.codeDir, 'labels.txt')
+
+    """
+    Main routine
+    """
+
+    def run(self):
+
+        self._checkConfig()
+        self._parseCode()
+
+        self._stopDatabaseServer()
+        self._startDatabaseServer()
+        
+        self._hideAdditionalCode()
+        self._labelCode()
+        
+        print 'Server is up. You can now load a scenario.'
+        
+    
+    def _genOutDirFromCodeDir(self):
+        topMostDir = (os.path.split(self.codeDir)[-1])
+        self.outDir = 'parsedCode/.%s' % topMostDir        
+    
+    def _checkConfig(self):
+
+        if self.codeDir == None or self.outDir == None:
+            print 'Error: codeDir not set'
+            sys.exit()
+
+    def _parseCode(self):
+    
+        print 'Parsing code: %s' % (self.codeDir)
+        print 'Output directory: %s' % (self.outDir)
+        
+        driver = JoernDriver("joern")
+        driver.parse(self.codeDir, self.outDir)
+        
+    def _startDatabaseServer(self):
+        os.system('%s %s' % ('joern-start-db', self.outDir))
+    
+    def _hideAdditionalCode(self):
+        # Hide all functions beneath 'patches'
+        patchDir = os.path.join(self.codeDir, 'patches')
+        cmd = 'echo "%s" | joern-hide' % (patchDir)
+        os.system(cmd)
+
+    def _labelCode(self):
+        
+        print 'Labeling code... ',
+        labelingTool = LabelingTool()
+        labelingTool.label(self.labelFilename)
+        print '[done]'
+
+    def _stopDatabaseServer(self):
+        os.system('%s' % ('joern-stop-db'))
+
+
+if __name__ == '__main__':
+
+    import sys
+    if len(sys.argv) != 2:
+        print 'usage: %s <codebase>' % (sys.argv[0])
+        sys.exit()
+
+    tool = EvaluationInitializer()
+    tool.setCodeDir(sys.argv[1])
+    tool.run()
