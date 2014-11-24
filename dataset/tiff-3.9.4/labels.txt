@@ -1,0 +1,2 @@
+"getFunctionsByFileAndName('*tif_dirread.c', 'TIFFFetchString').id",secure,1
+"getFunctionsByFileAndName('*tif_dirread.c', 'TIFFFetchSubjectDistance').id",secure,1
