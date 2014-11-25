@@ -1,0 +1,6 @@
+gcc version 4.9.2 (GCC)
+CFLAGS="-std=gnu99 -s -O0 -Wall -W"
+CXXFLAGS="-O0"
+
+libtiff 3.9.4, patched to introduce CVE-2006-0405 and CVE-2010-2067
+
