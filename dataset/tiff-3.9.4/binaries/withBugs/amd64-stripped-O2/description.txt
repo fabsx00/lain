@@ -1,6 +1,6 @@
 gcc version 4.9.2 (GCC)
-CFLAGS = -std=gnu99 -s -O2 -Wall -W
-CXXFLAGS = -O2
+CFLAGS="-std=gnu99 -s -O2 -Wall -W"
+CXXFLAGS="-O2"
 
 Also ran 'strip -s' on binary
 
