@@ -3,3 +3,10 @@ CFLAGS="-std=gnu99 -O2 -Wall -W"
 CXXFLAGS="-O2"
 
 libtiff 3.9.4, patched to introduce CVE-2006-0405 and CVE-2010-2067
+
+TIFFFetchShortPair (CVE-2006-0405) has been inlined into its only
+caller TIFFReadDirectory. The calls to TIFFFetchShortArray and
+TIFFFetchByteArray that cause the buffer overflow are located at:
+
+TIFFFetchShortArray: .text:000000000000FC69
+TIFFFetchByteArray: .text:000000000000FCD1

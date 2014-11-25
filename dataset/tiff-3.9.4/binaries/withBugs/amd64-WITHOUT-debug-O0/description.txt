@@ -4,3 +4,5 @@ CXXFLAGS="-O0"
 
 libtiff 3.9.4, patched to introduce CVE-2006-0405 and CVE-2010-2067
 
+TIFFFetchShortPair: .text:000000000001407B
+TIFFFetchSubjectDistance: .text:000000000001582D
