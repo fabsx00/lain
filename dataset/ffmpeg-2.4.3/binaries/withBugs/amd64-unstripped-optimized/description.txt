@@ -455,3 +455,8 @@ libavutil/avconfig.h is unchanged
 Did NOT run 'strip -s'. Despite the fact that the 'configure' output
 tells us symbols will be stripped, this is actually not the case, or
 at least, not all symbols are removed.
+
+Start of inlined function vmd_decode: .text:000000000051D59C
+Reading of frame_y: 	   	      .text:000000000051D5A0
+Reading of frame_x: 	   	      .text:000000000051D5A8
+memcpy producing overflow:	      .text:000000000051DD80
