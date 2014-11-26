@@ -450,3 +450,9 @@ Creating config.mak, config.h, and doc/config.texi...
 config.h is unchanged
 config.asm is unchanged
 libavutil/avconfig.h is unchanged
+
+
+
+
+Additionally ran 'strip -s' because I'm not sure it actually performed
+the stripping.
